@@ -130,12 +130,12 @@
             
             clickHandler( event )
             {
-				event.preventDefault();
 				const link = this.getLinkFromTarget( event.target );
 				if ( ! link )
 				{
-					return false;
+					return;
 				}
+				event.preventDefault();
 				const url = link.href;
 				const cleanURL = this.getStripURL( link );
 				const id = this.getTargetID( link );
@@ -154,5 +154,6 @@
 				}
             }
         }
+
     }
 )( jQuery );
