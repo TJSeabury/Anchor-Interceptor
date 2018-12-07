@@ -1,38 +1,3 @@
-'use strict';
-window.addEventListener(
-	'DOMContentLoaded',
-	() =>
-	{
-		/**
-		 * Interceptor constructor must be called with a css selector string 
-		 * that targets the header or nav that is used when calculating 
-		 * scroll offsets; e.g., '.mk-header.header-style-1'; an array of
-		 * classes must also be provided for interception targets. If an empty
-		 * targets array is provided all click events on anchors will be intercepted.
-		 * ( Quite obviously, that can lead to undesireble conflicting behavior, but one 
-		 * may do that if so desired. )
-		 */
-		let interceptor = new AnchorInterceptor( '.mk-header .mk-header-holder', ['smoothScrollThis','js-smooth-scroll'] );
-		if ( true === interceptor.checkForTarget() )
-		{
-			window.addEventListener(
-				'load',
-				() =>
-				{
-					interceptor.doAnimate( interceptor.getTarget() );
-				}
-			);
-		}
-		window.addEventListener(
-			'click',
-			function( ev )
-			{
-				interceptor.clickHandler( ev );
-			}
-		);
-	}
-);
-
 /**
  * Anchor Interceptor
  * © Copyright 2017-2018, Tyler Seabury, All Rights reserved.
@@ -42,21 +7,66 @@ window.addEventListener(
  */
 class AnchorInterceptor
 {
-	constructor( headerQueryString, targets = [] )
+	constructor()
 	{
-		this.header = (
-			function( hqs )
-			{
-				let header = document.querySelector( hqs );
-				if ( undefined !== header || null !== header )
-				{
-					return header;
-				}
-			}
-		)( headerQueryString );
+        this.header = null;
+        this.headerOffset = null;
+        this.targets = null;
+    }
+    
+    /**
+	 * Interceptor constructor must be called with a css selector string 
+	 * that targets the header or nav that is used when calculating 
+	 * scroll offsets; e.g., '.mk-header.header-style-1'; an array of
+	 * classes must also be provided for interception targets. If an empty
+	 * targets array is provided all click events on anchors will be intercepted.
+	 * ( Quite obviously, that can lead to undesireble conflicting behavior, but one 
+	 * may do that if one wished. )
+	 */
+    init( headerQueryString, targets = [] )
+    {
+		this.header = document.querySelector( headerQueryString );
+		if ( ! this.header ) { return; }
 		this.headerOffset = this.header.offsetHeight;
 		this.targets = targets;
-	}
+		for ( const t of this.targets )
+		{
+			const links = Array.from( document.querySelectorAll( '.' + t ) );
+			for ( const l of links )
+			{
+				if ( l.localName === 'a' )
+				{
+					if ( ! l.classList.contains( t ) )
+					{
+						l.classList.add( t );
+					}
+				}
+				else
+				{
+					const a = l.querySelector( 'a' );
+					if ( ! a.classList.contains( t ) )
+					{
+						a.classList.add( t );
+					}
+				}
+			}
+		}
+        if ( true === this.checkForTarget() )
+        {
+            window.addEventListener(
+                'load',
+                () =>
+                {
+                    this.doAnimate( this.getTarget() );
+                }
+            );
+        }
+        window.addEventListener(
+            'click',
+			this.clickHandler.bind( this )
+        );
+    }
+	
 
 	setTarget( anchorTarget )
 	{
@@ -94,13 +104,14 @@ class AnchorInterceptor
 				return false;
 			}
 			target = target.parentNode;
-		} 
+		}
 		return target;
 	}
 
 	getStripURL( url )
 	{
-		return url.substring( 0, url.indexOf( '#' ) );
+		const strippedURL = url.substring( 0, url.indexOf( '#' ) ) || url;
+		return ( ( strippedURL.charAt( strippedURL.length - 1 ) === '/' ) ? strippedURL : strippedURL + '/' );
 	}
 
 	getTargetID( link )
@@ -120,25 +131,33 @@ class AnchorInterceptor
 		{
 			return;
 		}
-		const deltaY = this.getScrollAmount( anchorTarget ) - this.headerOffset;
+		const wpadminbar = document.querySelector( '#wpadminbar' );
+		let ah = wpadminbar ? wpadminbar.offsetHeight : 0;
+		let deltaY = this.getScrollAmount( anchorTarget ) - this.headerOffset - ah;
 		if ( 0 === deltaY )
 		{
 			this.removeTarget();
 			return;
 		}
-		jQuery("html, body").animate(
-			{ scrollTop: deltaY + 'px' },
-			999
-		);
+		const a = window.animator || ( window.animator = new Animator() );
+        a.animate({
+            duration: 1000,
+            timing: a.easings.quadInOut,
+            draw: p =>
+            {
+				this.headerOffset = this.header.offsetHeight;
+        		deltaY = this.getScrollAmount( anchorTarget ) - this.headerOffset - ah;
+                document.documentElement.scrollTop += deltaY * p;
+				document.body.scrollTop += deltaY * p;
+            }
+        });
 		this.removeTarget();
 		return false;
 	}
 
 	getScrollAmount( t )
 	{
-		let windowOffset = t.getBoundingClientRect().top;
-		let elementOffset = window.scrollY + windowOffset;
-		return elementOffset;
+		return t.getBoundingClientRect().top;
 	}
 	
 	hasIntersectingClass( A, B )
@@ -187,3 +206,5 @@ class AnchorInterceptor
 		}
 	}
 }
+
+export { AnchorInterceptor };
