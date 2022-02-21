@@ -1,47 +1,58 @@
-# Windows image file caches
-Thumbs.db
+# ignore 3rd party libraries and packages
+node_modules/
+vendor/
+compiled/
+
+# ignore all files starting with . or ~
+.*
+~*
+
+# ignore node dependency directories (used by grunt)
+node_modules/
+
+# ignore OS generated files
 ehthumbs.db
+Thumbs.db
 
-# Folder config file
-Desktop.ini
+# ignore Editor files
+*.sublime-project
+*.sublime-workspace
+*.komodoproject
+*.codekit3
+.idea
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-# Windows shortcuts
-*.lnk
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
-# =========================
-# Operating System Files
-# =========================
+# -------------------------
+# BEGIN Whitelisted Files
+# -------------------------
 
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# track these files, if they exist
+!.gitignore
+!.editorconfig
+!.scss-lint.yml
+!README.md
+!CHANGELOG.md
+!composer.json
+!package.json
