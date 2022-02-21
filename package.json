@@ -1,0 +1,22 @@
+{
+  "name": "anchor-interceptor",
+  "version": "1.2.0",
+  "description": "A class that handles #fragment naivagtion and animation.",
+  "main": "anchor-interceptor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TJSeabury/Anchor-Interceptor.git"
+  },
+  "author": "Tyler Seabury",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TJSeabury/Anchor-Interceptor/issues"
+  },
+  "homepage": "https://github.com/TJSeabury/Anchor-Interceptor#readme",
+  "dependencies": {
+    "webpack": "^5.69.1"
+  }
+}
