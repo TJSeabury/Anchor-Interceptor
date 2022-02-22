@@ -2,4 +2,8 @@
 module.exports = {
     preset: 'ts-jest/presets/default-esm',
     testEnvironment: 'node',
+    setupFiles: [
+        "./test/__mocks__/dom.ts"
+    ],
+
 };
