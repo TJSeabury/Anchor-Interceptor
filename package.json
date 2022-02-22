@@ -2,7 +2,7 @@
     "name": "anchor-interceptor",
     "version": "1.2.0",
     "description": "A class that handles #fragment naivagtion and animation.",
-    "main": "anchor-interceptor.js",
+    "main": "index.ts",
     "scripts": {
         "build": "npx webpack --mode=production",
         "test": "echo \"Error: no test specified\" && exit 1"
