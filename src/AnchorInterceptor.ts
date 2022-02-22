@@ -77,23 +77,23 @@ export class AnchorInterceptor {
     }
 
     setTarget(anchorTarget: string): void {
-        sessionStorage.setItem('anchorTarget', anchorTarget);
+        window.sessionStorage.setItem('anchorTarget', anchorTarget);
     }
 
     getTarget(): string {
-        return sessionStorage.getItem('anchorTarget');
+        return window.sessionStorage.getItem('anchorTarget');
     }
     removeTarget(): boolean {
-        if (sessionStorage.getItem('anchorTarget')) {
-            sessionStorage.removeItem('anchorTarget');
+        if (window.sessionStorage.getItem('anchorTarget')) {
+            window.sessionStorage.removeItem('anchorTarget');
             return true;
         }
         return false;
     }
 
     checkForTarget(): boolean {
-        if (null !== sessionStorage.getItem('anchorTarget') &&
-            '' !== sessionStorage.getItem('anchorTarget')) {
+        if (null !== window.sessionStorage.getItem('anchorTarget') &&
+            '' !== window.sessionStorage.getItem('anchorTarget')) {
             return true;
         }
         return false;
