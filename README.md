@@ -1,5 +1,7 @@
 ![example workflow](https://github.com/TJSeabury/Anchor-Interceptor/actions/workflows/test.yml/badge.svg)
-<a href="https://www.npmjs.com/package/ts-jest"><img src="https://img.shields.io/npm/v/@tjseabury/anchor-interceptor/latest.svg?style=flat-square" alt="NPM version" /> </a>
+![GitHub](https://img.shields.io/github/license/TJSeabury/Anchor-Interceptor)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/TJSeabury/Anchor-Interceptor)
+<a href="https://www.npmjs.com/package/ts-jest"><img src="https://img.shields.io/npm/v/@tjseabury/anchor-interceptor/latest.svg?style=flat" alt="NPM version" /> </a>
 
 # Anchor-Interceptor
 
