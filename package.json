@@ -1,10 +1,10 @@
 {
     "name": "@tjseabury/anchor-interceptor",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "A class that handles #fragment naivagtion and animation.",
     "main": "index.ts",
     "scripts": {
-        "build": "npx webpack --mode=production",
+        "build": "tsc build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -17,13 +17,7 @@
         "url": "https://github.com/TJSeabury/Anchor-Interceptor/issues"
     },
     "homepage": "https://github.com/TJSeabury/Anchor-Interceptor#readme",
-    "dependencies": {
-        "webpack": "^5.69.1"
-    },
     "devDependencies": {
-        "terser-webpack-plugin": "^5.3.1",
-        "ts-loader": "^9.2.6",
-        "typescript": "^4.5.5",
-        "webpack-cli": "^4.9.2"
+        "typescript": "^4.5.5"
     }
 }
