@@ -12,7 +12,7 @@
         "url": "git+https://github.com/TJSeabury/Anchor-Interceptor.git"
     },
     "author": "Tyler Seabury",
-    "license": "ISC",
+    "license": "GPLv2",
     "bugs": {
         "url": "https://github.com/TJSeabury/Anchor-Interceptor/issues"
     },
