@@ -8,7 +8,7 @@ export default class Utils {
     }
 
     static symetricDifference(a: any[], b: any[]): any[] {
-        return this.difference(a, b).concat(this.difference(b, a));
+        return Utils.difference(a, b).concat(Utils.difference(b, a));
     }
 
     static union(a: any[], b: any[]): any[] {
