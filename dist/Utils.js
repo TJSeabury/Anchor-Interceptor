@@ -6,7 +6,7 @@ export default class Utils {
         return a.filter(x => !b.includes(x));
     }
     static symetricDifference(a, b) {
-        return this.difference(a, b).concat(this.difference(b, a));
+        return Utils.difference(a, b).concat(Utils.difference(b, a));
     }
     static union(a, b) {
         return [...new Set([...a, ...b])];
