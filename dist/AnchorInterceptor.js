@@ -43,21 +43,21 @@ export class AnchorInterceptor {
         });
     }
     setTarget(anchorTarget) {
-        sessionStorage.setItem('anchorTarget', anchorTarget);
+        window.sessionStorage.setItem('anchorTarget', anchorTarget);
     }
     getTarget() {
-        return sessionStorage.getItem('anchorTarget');
+        return window.sessionStorage.getItem('anchorTarget');
     }
     removeTarget() {
-        if (sessionStorage.getItem('anchorTarget')) {
-            sessionStorage.removeItem('anchorTarget');
+        if (window.sessionStorage.getItem('anchorTarget')) {
+            window.sessionStorage.removeItem('anchorTarget');
             return true;
         }
         return false;
     }
     checkForTarget() {
-        if (null !== sessionStorage.getItem('anchorTarget') &&
-            '' !== sessionStorage.getItem('anchorTarget')) {
+        if (null !== window.sessionStorage.getItem('anchorTarget') &&
+            '' !== window.sessionStorage.getItem('anchorTarget')) {
             return true;
         }
         return false;
@@ -74,10 +74,7 @@ export class AnchorInterceptor {
         return target;
     }
     getStripURL(url) {
-        const strippedURL = url.substring(0, url.indexOf('#')) || url;
-        return (strippedURL.charAt(strippedURL.length - 1) === '/' ?
-            strippedURL :
-            strippedURL + '/');
+        return url.substring(0, url.indexOf('#')) || url;
     }
     getTargetID(link) {
         const target = link.href.substring(link.href.indexOf('#') + 1);
